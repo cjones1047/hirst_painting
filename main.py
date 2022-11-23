@@ -28,11 +28,17 @@ movement = 50
 dot = 20
 turtle.goto(-100, -100)
 position = turtle.position()
+new_row = (position[0] + (movement * 9), position[1])
 
 for _ in range(100):
     random_color = random.choice(rgb_colors)
     turtle.dot(dot, random_color)
-    turtle.forward(movement)
+    if turtle.position() == new_row:
+        turtle.goto(position[0], position[1] + movement)
+        position = turtle.position()
+        new_row = (position[0] + (movement * 9), position[1])
+    else:
+        turtle.forward(movement)
 
 screen = Screen()
 screen.exitonclick()
